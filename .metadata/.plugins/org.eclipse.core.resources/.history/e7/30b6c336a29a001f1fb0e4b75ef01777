@@ -1,0 +1,5 @@
+package com.ust.eventmanagement.Exceptions;
+
+public class NoBudgetFoundException {
+
+}

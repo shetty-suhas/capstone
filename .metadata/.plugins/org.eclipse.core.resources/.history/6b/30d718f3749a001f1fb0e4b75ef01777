@@ -1,0 +1,8 @@
+package com.ust.guest_service.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.ust.guest_service.Model.GuestGroup;
+
+public interface GuestGroupRepository extends MongoRepository<GuestGroup, Long>{
+}

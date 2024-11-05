@@ -1,0 +1,5 @@
+package com.example.cloudGateway.Entity;
+
+public class ApiRoute {
+
+}

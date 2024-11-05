@@ -1,0 +1,42 @@
+package com.ust.gateway.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
+import org.springframework.stereotype.Service;
+
+import com.ust.gateway.Repository.GatewayRepositry;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+public class MongoDefinitionRepository implements RouteDefinitionRepository{ 
+	
+	@Autowired(required = false)
+	private GatewayRepositry gatewayRepositry;
+	
+	@Override
+	public Flux<RouteDefinition> getRouteDefinitions() {
+		return Flux.fromIterable(gatewayRepositry.findAll());
+	}
+
+	@Override
+	public Mono<Void> save(Mono<RouteDefinition> route) {
+		return route.flatMap(routeDefinition -> {
+            return Mono.empty();
+        });
+	}
+
+	@Override
+	public Mono<Void> delete(Mono<String> routeId) {
+        return routeId.flatMap(id -> {
+            int delete = gatewayRepositry.delete(routeId);
+            if (delete > 0) {
+                return Mono.empty();
+            }
+            return Mono.defer(() -> Mono.error(new Exception("delete route definition error, routeId:" + routeId)));
+        });
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.ust.gateway.Config;
+
+@Configuration
+public class GatewayConfig {
+    private RequestAndResponseLogGlobalFilter requestAndResponseLogGlobalFilter;
+
+    @Bean
+    public RouteLocator routeLocator(RouteService routeService, RouteLocatorBuilder routeLocationBuilder) {
+        return new ApiRouteLocatorImpl(routeLocationBuilder, routeService);
+    }
+}

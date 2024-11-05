@@ -1,0 +1,41 @@
+package com.ust.eventmanagement.Model;
+
+import java.sql.Date;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.ust.eventmanagement.Enums.DateTime;
+import com.ust.eventmanagement.Enums.EventStatus;
+import com.ust.eventmanagement.Enums.EventType;
+
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data 
+@AllArgsConstructor 
+@NoArgsConstructor
+@Document
+public class Event { 
+	@Id
+	private Long id;  
+	private Long eventUserId; 
+	private String name, location; 
+	private DateTime startDate, endDate; 
+	private EventType type; 
+	private EventStatus status; 
+	
+//	public void createEvent() { 
+//		
+//	} 
+//	public void cancelEvent() { 
+//		
+//	} 
+//	public void updateEvent() { 
+//		
+//	} 
+//	public void getEventDetails() { 
+//		
+//	}
+}

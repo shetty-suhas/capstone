@@ -1,0 +1,5 @@
+package com.ust.guest_service.Model;
+
+public class Guest {
+
+}

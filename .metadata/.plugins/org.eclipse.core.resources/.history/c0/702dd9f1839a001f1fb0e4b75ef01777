@@ -1,0 +1,5 @@
+package com.ust.vendor_service.Model;
+
+public class Vendor {
+
+}

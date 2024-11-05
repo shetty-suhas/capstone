@@ -1,0 +1,5 @@
+package com.ust.gateway.Service;
+
+public class RouteServiceImpl {
+
+}

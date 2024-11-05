@@ -1,0 +1,11 @@
+package com.ust.gateway.Service;
+
+import com.ust.gateway.Model.ApiRoutes;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+public interface RouteService {
+	public Flux<ApiRoutes> getAll();
+	public Mono<ApiRoutes> create(ApiRoutes apiRoute);
+}

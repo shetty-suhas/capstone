@@ -1,0 +1,32 @@
+package com.ust.gateway;
+
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration 
+@RefreshScope
+public class SpringCloudGatewayConfig { 
+	
+	@Bean
+	public RouteLocator gateWayRoute(RouteLocatorBuilder routeLocatorbuilder) { 
+		return routeLocatorbuilder
+				.routes() 
+				.route("Guest-service", r -> r.path("/guest/**")
+						.filters(f -> f.addResponseHeader("X-responseHeader", "Guest"))
+						.uri("http://localhost:8092"))
+				.route("Payment-service", r -> r.path("/payment/**")
+						.filters(f -> f.addResponseHeader("X-reponseHeader", "Payment"))
+						.uri("http://localhost:8091")) 
+				.route("User-service", r -> r.path("/user/**")
+						.filters(f -> f.addResponseHeader("X-responseHeader", "User"))
+						.uri("http://localhost:8095")) 
+				.route("Vendor-service", r -> r.path("/vendor/**")
+						.filters(f -> f.addResponseHeader("X-responseHeader", "Vendor"))
+						.uri("http://localhost:8093"))
+				.build();
+	} 
+	
+}

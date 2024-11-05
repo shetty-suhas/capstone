@@ -1,0 +1,5 @@
+package com.ust.eventmanagement.Model;
+
+public class Payment {
+
+}

@@ -1,0 +1,5 @@
+package com.ust.gateway.handler;
+
+public class ApiRouteHandler {
+
+}

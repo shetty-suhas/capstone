@@ -1,0 +1,5 @@
+package com.ust.payment_service.controller;
+
+public class PaymentController {
+
+}

@@ -1,0 +1,13 @@
+package com.ust.gateway.Repository;
+
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import reactor.core.publisher.Mono;
+
+@Repository
+public interface MyGatewayRepository extends MongoRepository<RouteDefinition, String>{ 
+	public int delete(Mono<String> routeId);
+}
+

@@ -1,0 +1,20 @@
+package com.ust.payment_service.Model;
+
+import com.ust.payment_service.Enums.DateTime;
+import com.ust.payment_service.Enums.PaymentStatus;
+import com.ust.payment_service.Enums.PaymentType;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor 
+public class Payment { 
+	private Long id;  
+	private Double amount; 
+	DateTime paymentDate; 
+	PaymentStatus paymentStatus; 
+	PaymentType paymentType;
+}

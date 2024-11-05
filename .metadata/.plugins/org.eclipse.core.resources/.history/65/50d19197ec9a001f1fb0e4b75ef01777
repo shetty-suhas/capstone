@@ -1,0 +1,12 @@
+package com.ust.gateway.Repository;
+
+import java.util.List;
+
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface GatewayRepositry extends CrudRepository<RouteDefinition, String>{ 
+	public List<RouteDefinition> findAll();
+}

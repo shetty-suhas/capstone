@@ -1,0 +1,5 @@
+package com.example.cloudGateway.Service;
+
+public class RouteServiceImpl {
+
+}

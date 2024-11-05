@@ -1,0 +1,31 @@
+package com.ust.eventmanagement.Service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.ust.eventmanagement.Exceptions.NoBudgetFoundException;
+import com.ust.eventmanagement.Model.Budget;
+import com.ust.eventmanagement.Repository.BudgetRepository;
+
+@Service
+public class BudgetService { 
+	
+	@Autowired
+	private BudgetRepository budgetRepository; 
+	
+	public ResponseEntity<Budget> getBudgetById(String id) throws NoBudgetFoundException{  
+		Optional<Budget> optional = budgetRepository.findById(id); 
+		if(optional.isEmpty()) throw new NoBudgetFoundException("Budget Not found"); 
+		return ResponseEntity.ok(optional.get());
+	} 
+	
+	public ResponseEntity<Budget> getBudgetByUserId(String id) throws NoBudgetFoundException{ 
+		Optional<Budget> optional = budgetRepository.findByUserId(id); 
+		if(optional.isEmpty()) throw new NoBudgetFoundException("Budget Not found"); 
+		return ResponseEntity.ok(optional.get());
+	} 
+
+}

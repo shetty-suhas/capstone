@@ -1,0 +1,9 @@
+package com.ust.eventmanagement.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.ust.eventmanagement.Model.Event;
+
+public interface EventRepository extends MongoRepository<Event, Long>{
+
+}

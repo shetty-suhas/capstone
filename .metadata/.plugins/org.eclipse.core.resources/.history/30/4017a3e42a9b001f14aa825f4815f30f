@@ -1,0 +1,9 @@
+package com.ust.gateway.Repository;
+
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+
+import com.ust.gateway.Model.ApiRoutes;
+
+public interface RouteRepository extends ReactiveCrudRepository<ApiRoutes, String>{
+
+}

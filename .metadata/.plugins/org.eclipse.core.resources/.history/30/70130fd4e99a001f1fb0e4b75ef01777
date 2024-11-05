@@ -1,0 +1,12 @@
+package com.ust.gateway.Repository;
+
+import java.util.List;
+
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface GatewayRepositry extends MongoRepository<RouteDefinition, String>{ 
+	public List<RouteDefinition> findAll();
+}

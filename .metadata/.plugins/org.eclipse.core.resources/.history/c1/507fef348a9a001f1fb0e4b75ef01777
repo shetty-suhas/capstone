@@ -1,0 +1,9 @@
+package com.ust.vendor_service.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.ust.vendor_service.Model.Vendor;
+
+public interface VendorRepository extends MongoRepository<Vendor, Long>{
+
+}
