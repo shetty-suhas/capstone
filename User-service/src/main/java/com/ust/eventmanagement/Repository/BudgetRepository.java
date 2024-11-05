@@ -9,6 +9,6 @@ import com.ust.eventmanagement.Model.Budget;
 
 @Repository
 public interface BudgetRepository extends MongoRepository<Budget, String>{ 
-	public Optional<Budget> findByUserId(String userId);
+	public Optional<Budget> findBySubEventId(String eventId);
 	
 }

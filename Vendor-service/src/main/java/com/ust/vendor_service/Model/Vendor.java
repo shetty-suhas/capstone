@@ -22,4 +22,5 @@ public class Vendor {
 	private VendorType type; 
 	private List<Payment> payments; 
 	private Double totalAmount, pendingAmount;	
+	private String scheduleId;
 }

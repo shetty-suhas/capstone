@@ -3,6 +3,7 @@ package com.ust.eventmanagement.Model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,5 +31,6 @@ public class SubEvent {
 	private Date startTime, endTime;  
 	
 	private List<Vendor> requiredVendors; 
-	private List<GuestGroup> involvedGroups;	
+	private List<GuestGroup> involvedGroups;  
+	private String scheduleId;
 }

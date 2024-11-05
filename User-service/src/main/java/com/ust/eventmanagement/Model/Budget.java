@@ -15,8 +15,9 @@ import lombok.NoArgsConstructor;
 @Document
 public class Budget { 
 	@Id
-	String id;
-	Double totalAmount, allocatedAmount, spentAmount; 
-	Map<String, Double> categoryAllocations; 
-	String userId; 
+	private String id;
+	private Double totalAmount, allocatedAmount, spentAmount; 
+	private Map<String, Double> categoryAllocations; 
+	private String scheduleId; 
+	private String subEventId;
 }

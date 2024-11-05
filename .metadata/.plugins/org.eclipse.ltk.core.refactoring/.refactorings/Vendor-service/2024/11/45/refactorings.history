@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;Vendor-service&apos;&#x0D;&#x0A;- Original project: &apos;Vendor-service&apos;&#x0D;&#x0A;- Original element: &apos;Vendor-service/src/main/java/com.ust.vendor_service.Exceptions&apos;" description="Delete element" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ust.vendor_service.Exceptions" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1730801386711" subPackages="false" version="1.0"/>
+</session>

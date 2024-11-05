@@ -10,6 +10,6 @@ import com.ust.payment_service.Model.Payment;
 
 @Repository
 public interface PaymentRepository extends MongoRepository<Payment, String>{ 
-	public Optional<List<Payment>> findPaymentByVendorId(String vendorId); 
-	public Optional<List<Payment>> findPaymentByEventId(String eventId); 
+	public List<Payment> findByVendorId(String vendorId); 
+	public List<Payment> findByEventId(String eventId); 
 }

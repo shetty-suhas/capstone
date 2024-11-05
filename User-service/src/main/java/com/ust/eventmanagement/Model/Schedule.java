@@ -22,11 +22,11 @@ import lombok.NoArgsConstructor;
 public class Schedule { 
 	
 	@Id
-	private String id; 
-	private List<SubEvent> subEvents; 
+	private String id;
 
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(style = "dd-mm-yyyy hh:mm")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy hh:mm")
 	private Date lastUpdated;
+	private String eventId; 
 }

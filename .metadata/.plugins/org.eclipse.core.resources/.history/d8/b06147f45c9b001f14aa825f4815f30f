@@ -1,0 +1,31 @@
+package com.ust.eventmanagement.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.ust.eventmanagement.Exceptions.NoEventsFound;
+import com.ust.eventmanagement.Model.Event;
+import com.ust.eventmanagement.Repository.EventRepository;
+
+
+@Service
+public class EventService { 
+	
+	@Autowired
+	private EventRepository eventRepository; 
+	
+	public ResponseEntity<List<Event>> getEventsByUser(String userId) throws NoEventsFound{ 
+		Optional<List<Event>> optional = eventRepository.findByUserId(userId); 
+		if(optional.isEmpty()) throw new NoEventsFound("No associated events found"); 
+		return ResponseEntity.ok(optional.get());
+	} 
+	
+	public ResponseEntity<Event> addevent(@RequestBody Event event){ 
+		return ResponseEntity.ok(eventRepository.save(event));
+	}
+}
