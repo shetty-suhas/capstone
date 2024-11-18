@@ -18,5 +18,6 @@ public class EventUser {
 	private String id; 
 	private String name; 
 	private List<Event> eventList;
+	private String password;
 
 }

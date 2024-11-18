@@ -1,0 +1,34 @@
+spring:
+  application: 
+    name: EVENTMANAGEMENTGATEWAY
+  cloud:
+    gateway:
+      routes:  
+        - id: vendorservice
+          uri: lb://VENDORSERVICE
+          predicates:
+            - Path=/vendor/**
+          filters:
+            - AuthenticationFilter
+        - id: userservice
+          uri: lb://USER-SERVICE
+          predicates: 
+            - Path=/user/**
+          filters:
+            - AuthenticationFilter
+        - id: paymentservice
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/**
+          filters:
+            - AuthenticationFilter
+        - id: guestservice
+          uri: lb://GUEST-SERVICE
+          predicates:
+            - Path=/guest/**
+          filters:
+            - AuthenticationFilter
+
+
+
+       

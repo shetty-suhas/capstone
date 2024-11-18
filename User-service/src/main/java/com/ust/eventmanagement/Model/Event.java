@@ -1,6 +1,6 @@
 package com.ust.eventmanagement.Model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,7 +25,8 @@ public class Event {
 	@Id
 	private String id;  
 	private String userId; 
-	private String name, location;  
+	private String name, location; 
+	private String description;
 
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(style = "dd-mm-yyyy hh:mm")
@@ -33,6 +34,7 @@ public class Event {
 	private Date startDate, endDate; 
 	
 	private EventType type; 
-	private EventStatus status; 
-	
+	private EventStatus status;  
+	int totalTask, taskCompleted, totalGuests; 
+	Budget budget;
 }

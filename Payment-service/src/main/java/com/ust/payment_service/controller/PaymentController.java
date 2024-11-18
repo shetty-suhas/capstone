@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ust.payment_service.Enums.PaymentStatus;
+import com.ust.payment_service.Enums.PaymentType;
 import com.ust.payment_service.Model.Payment;
 import com.ust.payment_service.Service.PaymentService;
 
@@ -26,7 +29,13 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Payment> create(@RequestBody Payment payment) {
         return paymentService.create(payment);
-    }
+    } 
+    
+	@GetMapping("/test") 
+	public String hello() { 
+		return "Hello";
+	}
+	
 
     @GetMapping("/{id}")
     public ResponseEntity<Payment> getById(@PathVariable String id) {
@@ -56,5 +65,31 @@ public class PaymentController {
     @GetMapping("/event/{eventId}")
     public ResponseEntity<List<Payment>> findByEventId(@PathVariable String eventId) {
         return paymentService.findByEventId(eventId);
+    }
+    
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Payment>> findByPaymentStatus(@PathVariable PaymentStatus status) {
+        return paymentService.findByPaymentStatus(status);
+    }
+
+    // Get all payments of a specific payment type
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<Payment>> findByPaymentType(@PathVariable PaymentType type) {
+        return paymentService.findByPaymentType(type);
+    }
+
+    // Get all payments made within a specific date range
+    @GetMapping("/date-range")
+    public ResponseEntity<List<Payment>> findByPaymentDateRange(
+        @RequestParam("startDate") String startDate, 
+        @RequestParam("endDate") String endDate) {
+        return paymentService.findByPaymentDateRange(startDate, endDate);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Payment> updatePaymentStatus(
+        @PathVariable String id, 
+        @RequestParam PaymentStatus status) {
+        return paymentService.updatePaymentStatus(id, status);
     }
 }

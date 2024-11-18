@@ -68,5 +68,36 @@ public class EventService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(events);
+    } 
+    
+    public ResponseEntity<Event> updateTaskCounts(String eventId, int taskCompleted, int totalTask) {
+        try {
+            Event existingEvent = eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+
+            existingEvent.setTotalTask(totalTask);
+            existingEvent.setTaskCompleted(taskCompleted);
+
+            Event updatedEvent = eventRepository.save(existingEvent);
+            return ResponseEntity.ok(updatedEvent);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    } 
+    public ResponseEntity<Event> updateEventGuests(String eventId, int totalGuests) {
+        try {
+            Optional<Event> optionalEvent = eventRepository.findById(eventId);
+            
+            if (optionalEvent.isPresent()) {
+                Event event = optionalEvent.get();
+                event.setTotalGuests(totalGuests);
+                Event updatedEvent = eventRepository.save(event);
+                return ResponseEntity.ok(updatedEvent);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

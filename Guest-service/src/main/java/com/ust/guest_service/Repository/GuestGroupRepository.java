@@ -1,5 +1,6 @@
 package com.ust.guest_service.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -9,5 +10,6 @@ import com.ust.guest_service.Model.GuestGroup;
 
 @Repository
 public interface GuestGroupRepository extends MongoRepository<GuestGroup, String>{ 
-	public Optional<GuestGroup> findGuestGroupByEventId(String eventId);
+    Optional<GuestGroup> findGuestGroupByEventId(String eventId);
+    List<GuestGroup> findByEventId(String eventId);
 }

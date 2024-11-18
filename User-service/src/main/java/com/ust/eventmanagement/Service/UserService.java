@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -16,9 +17,17 @@ import com.ust.eventmanagement.Repository.UserRepository;
 public class UserService {
 	
 	@Autowired 
-	private UserRepository userRepository;  
+	private UserRepository userRepository;   
+	
+    @Autowired
+    private JwtService jwtService; 
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public ResponseEntity<EventUser> create(EventUser eventUser) {
+
+    public ResponseEntity<EventUser> create(EventUser eventUser) { 
+    	eventUser.setPassword(passwordEncoder.encode(eventUser.getPassword()));
         EventUser savedEventUser = userRepository.save(eventUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEventUser);
     }
@@ -53,5 +62,24 @@ public class UserService {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    } 
+    
+    public String generateToken(String username) {
+        return jwtService.generateToken(username);
+    }
+
+    public void validateToken(String token) {
+        jwtService.validateToken(token);
+    } 
+    
+
+    public ResponseEntity<List<EventUser>> searchByEvent(String event) {
+        List<EventUser> users = userRepository.findByEventList_Name(event);
+        return ResponseEntity.ok(users);
+    }
+
+    public ResponseEntity<EventUser> getByName(String name) {
+        Optional<EventUser> user = userRepository.findByName(name);
+        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }
