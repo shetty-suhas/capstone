@@ -102,5 +102,37 @@ public class VendorService {
             
     }
     
+    public Payment updatePayment(String vendorId, String paymentId, Payment updatedPayment) {
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        List<Payment> payments = vendor.getPayments();
+        int paymentIndex = -1;
+
+        for (int i = 0; i < payments.size(); i++) {
+            if (payments.get(i).getId().equals(paymentId)) {
+                paymentIndex = i;
+                break;
+            }
+        }
+        updatedPayment.setId(paymentId);
+        updatedPayment.setVendorId(vendorId);
+        
+        payments.set(paymentIndex, updatedPayment);
+
+        vendor.setPayments(payments);
+        
+        double totalPaidAmount = payments.stream()
+            .mapToDouble(Payment::getAmount)
+            .sum();
+
+       
+        vendor.setPendingAmount(vendor.getTotalAmount() - totalPaidAmount);
+
+
+        vendorRepository.save(vendor);
+
+        return updatedPayment;
+        
+    }
+
     
 }

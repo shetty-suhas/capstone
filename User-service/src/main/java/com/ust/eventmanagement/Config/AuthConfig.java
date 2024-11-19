@@ -25,13 +25,16 @@ public class AuthConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-//                .authorizeHttpRequests()
-//                .requestMatchers("")
-//                .permitAll()
-//                .and()
-                .build(); 
-//        "/user/auth/create", "/user/auth/login", "/user/validate", "/event/"
+        return http
+                .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/user/auth/create", "user/auth/login")  
+                .permitAll()
+                .anyRequest()             
+                .authenticated()           
+                .and()
+                .build();
+        
     }
 
     @Bean

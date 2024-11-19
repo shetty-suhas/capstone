@@ -25,8 +25,8 @@ public class Payment {
 	private String referenceNumber;
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(style = "dd-mm-yyyy")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
+	@DateTimeFormat(style = "dd-MM-yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	Date paymentDate;  
 	
 	PaymentStatus paymentStatus; 

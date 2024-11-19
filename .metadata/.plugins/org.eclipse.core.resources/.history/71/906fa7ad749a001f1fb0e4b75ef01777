@@ -1,5 +1,0 @@
-package com.ust.guest_service.Repository;
-
-public interface GuestGroup {
-
-}

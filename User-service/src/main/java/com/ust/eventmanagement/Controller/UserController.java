@@ -78,10 +78,6 @@ public class UserController {
         return userService.getByName(name);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<EventUser>> searchByEvent(@RequestParam String event) {
-        return userService.searchByEvent(event);
-    }
 
 
 }

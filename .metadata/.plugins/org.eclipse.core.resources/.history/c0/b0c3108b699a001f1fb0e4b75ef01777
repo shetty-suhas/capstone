@@ -1,9 +1,0 @@
-package com.ust.payment_service.Repository;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import com.ust.payment_service.Model.Payment;
-
-public interface PaymentRepository extends MongoRepository<Payment, Long>{
-
-}

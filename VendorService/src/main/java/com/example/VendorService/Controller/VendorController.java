@@ -79,6 +79,15 @@ public class VendorController {
         
             return vendorService.deletePayment(vendorId, paymentId); 
     }
+    @PutMapping("/updatepayment/{vendorId}/{paymentId}")
+    public ResponseEntity<Payment> updatePayment(
+            @PathVariable String vendorId,
+            @PathVariable String paymentId,
+            @RequestBody Payment updatedPayment) {
+            Payment payment = vendorService.updatePayment(vendorId, paymentId, updatedPayment);
+            return ResponseEntity.ok(payment);
+
+    }
  
   
 }

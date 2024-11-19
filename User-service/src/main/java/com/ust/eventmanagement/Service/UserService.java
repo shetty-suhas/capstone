@@ -47,7 +47,6 @@ public class UserService {
         if (existingEventUserOpt.isPresent()) {
             EventUser existingEventUser = existingEventUserOpt.get();
             existingEventUser.setName(eventUser.getName());
-            existingEventUser.setEventList(eventUser.getEventList());
 
             EventUser updatedEventUser = userRepository.save(existingEventUser);
             return ResponseEntity.ok(updatedEventUser);
@@ -72,11 +71,6 @@ public class UserService {
         jwtService.validateToken(token);
     } 
     
-
-    public ResponseEntity<List<EventUser>> searchByEvent(String event) {
-        List<EventUser> users = userRepository.findByEventList_Name(event);
-        return ResponseEntity.ok(users);
-    }
 
     public ResponseEntity<EventUser> getByName(String name) {
         Optional<EventUser> user = userRepository.findByName(name);

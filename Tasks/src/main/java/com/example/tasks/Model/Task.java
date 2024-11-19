@@ -27,9 +27,9 @@ public class Task {
 	private String description; 
 	TaskStatus status;
 
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(style = "yyyy-mm-dd hh:mm")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-mm-dd hh:mm") 
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "dd-MM-yyyy hh:mm")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy hh:mm") 
 	private Date startDateTime, endDateTime;
 	
 	private String eventId; 

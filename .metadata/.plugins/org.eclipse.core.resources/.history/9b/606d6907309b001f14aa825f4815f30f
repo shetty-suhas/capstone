@@ -1,5 +1,0 @@
-package com.example.cloudGateway.Service;
-
-public interface RouteService {
-
-}

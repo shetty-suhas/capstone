@@ -1,5 +1,0 @@
-package com.ust.vendor_service.Repository;
-
-public interface VendorRepository {
-
-}

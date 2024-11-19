@@ -11,5 +11,4 @@ import com.ust.eventmanagement.Model.EventUser;
 @Repository
 public interface UserRepository extends MongoRepository<EventUser, String> {
     Optional<EventUser> findByName(String username);
-    List<EventUser> findByEventList_Name(String eventName);
 }

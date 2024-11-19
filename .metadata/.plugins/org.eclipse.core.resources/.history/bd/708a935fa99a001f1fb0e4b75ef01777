@@ -1,5 +1,0 @@
-package com.ust.eventmanagement.Repository;
-
-public interface ScheduleRepository {
-
-}

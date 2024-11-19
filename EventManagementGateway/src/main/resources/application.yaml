@@ -13,13 +13,19 @@ spring:
         - id: userservice
           uri: lb://USER-SERVICE
           predicates: 
-            - Path=/user/**
+            - Path=/user/** 
           filters:
-            - AuthenticationFilter
-        - id: paymentservice
-          uri: lb://PAYMENT-SERVICE
+            - AuthenticationFilter 
+        - id: eventservice
+          uri: lb://EVENT-SERVICE
+          predicates: 
+            - Path=/event/**
+          filters:
+            - AuthenticationFilter 
+        - id: task
+          uri: lb://TASKS
           predicates:
-            - Path=/payment/**
+            - Path=/tasks/**
           filters:
             - AuthenticationFilter
         - id: guestservice
