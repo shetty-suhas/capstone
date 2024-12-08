@@ -76,34 +76,55 @@ public class VendorService {
     	if(optional.isEmpty()) return ResponseEntity.notFound().build(); 
     	return ResponseEntity.ok(optional.get().getPayments());
     }
-    public ResponseEntity<Vendor> addPaymentToVendor(String id, Payment payment){  
-    	Optional<Vendor> optional = vendorRepository.findById(id); 
-    	if(optional.isEmpty()) return ResponseEntity.notFound().build(); 
-    	List<Payment> payments = optional.get().getPayments(); 
-    	payments.add(payment);  
-    	optional.get().setPayments(payments);
-    	return ResponseEntity.ok(vendorRepository.save(optional.get()));
+    public ResponseEntity<Vendor> addPaymentToVendor(String id, Payment payment) {  
+        Optional<Vendor> optional = vendorRepository.findById(id); 
+        if(optional.isEmpty()) return ResponseEntity.notFound().build(); 
+        
+        Vendor vendor = optional.get();
+        List<Payment> payments = vendor.getPayments(); 
+        payments.add(payment);  
+        vendor.setPayments(payments);
+        
+        // Calculate total paid amount and update pending amount
+        double totalPaidAmount = payments.stream()
+            .mapToDouble(Payment::getAmount)
+            .sum();
+        vendor.setPendingAmount(vendor.getTotalAmount() - totalPaidAmount);
+        
+        return ResponseEntity.ok(vendorRepository.save(vendor));
     }  
-    
-    public ResponseEntity<Vendor> deletePayment(String vendorId, String paymentId){ 
-    	Optional<Vendor> optional = vendorRepository.findById(vendorId); 
-    	if(optional.isEmpty()) return ResponseEntity.noContent().build(); 
-    	List<Payment> payments = optional.get().getPayments(); 
-    	Payment paymentToRemove = null;
+
+    public ResponseEntity<Vendor> deletePayment(String vendorId, String paymentId) { 
+        Optional<Vendor> optional = vendorRepository.findById(vendorId); 
+        if(optional.isEmpty()) return ResponseEntity.noContent().build(); 
+        
+        Vendor vendor = optional.get();
+        List<Payment> payments = vendor.getPayments(); 
+        Payment paymentToRemove = null;
+        
         for (Payment payment : payments) {
             if (payment.getId().equals(paymentId)) {
                 paymentToRemove = payment;
                 break;
             }
         } 
+        
         payments.remove(paymentToRemove);
-        optional.get().setPayments(payments);
-        return ResponseEntity.ok(vendorRepository.save(optional.get())); 
-            
+        vendor.setPayments(payments);
+        
+        // Calculate total paid amount and update pending amount
+        double totalPaidAmount = payments.stream()
+            .mapToDouble(Payment::getAmount)
+            .sum();
+        vendor.setPendingAmount(vendor.getTotalAmount() - totalPaidAmount);
+        
+        return ResponseEntity.ok(vendorRepository.save(vendor)); 
     }
-    
+
     public Payment updatePayment(String vendorId, String paymentId, Payment updatedPayment) {
-        Vendor vendor = vendorRepository.findById(vendorId).get();
+        Vendor vendor = vendorRepository.findById(vendorId)
+            .orElseThrow(() -> new RuntimeException("Vendor not found"));
+            
         List<Payment> payments = vendor.getPayments();
         int paymentIndex = -1;
 
@@ -113,25 +134,24 @@ public class VendorService {
                 break;
             }
         }
+        
+        if (paymentIndex == -1) {
+            throw new RuntimeException("Payment not found");
+        }
+        
         updatedPayment.setId(paymentId);
         updatedPayment.setVendorId(vendorId);
-        
         payments.set(paymentIndex, updatedPayment);
-
         vendor.setPayments(payments);
         
+        // Calculate total paid amount and update pending amount
         double totalPaidAmount = payments.stream()
             .mapToDouble(Payment::getAmount)
             .sum();
-
-       
         vendor.setPendingAmount(vendor.getTotalAmount() - totalPaidAmount);
 
-
         vendorRepository.save(vendor);
-
         return updatedPayment;
-        
     }
 
     

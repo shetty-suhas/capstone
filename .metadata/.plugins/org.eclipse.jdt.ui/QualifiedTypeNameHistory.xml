@@ -32,9 +32,6 @@
     <fullyQualifiedTypeName name="com.example.VendorService.Repository.PaymentRepository"/>
     <fullyQualifiedTypeName name="com.example.VendorService.Repository.VendorRepository"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="com.example.VendorService.Enums.PaymentStatus"/>
     <fullyQualifiedTypeName name="com.example.VendorService.Enums.PaymentType"/>
     <fullyQualifiedTypeName name="com.example.VendorService.Model.Vendor"/>
@@ -47,4 +44,7 @@
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.ust.eventmanagement.Model.Budget"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
 </qualifiedTypeNameHistroy>

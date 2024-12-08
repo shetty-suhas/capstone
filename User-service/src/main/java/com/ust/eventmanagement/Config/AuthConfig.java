@@ -28,7 +28,7 @@ public class AuthConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user/auth/create", "user/auth/login")  
+                .requestMatchers("/user/auth/create", "user/auth/login", "*")  
                 .permitAll()
                 .anyRequest()             
                 .authenticated()           
