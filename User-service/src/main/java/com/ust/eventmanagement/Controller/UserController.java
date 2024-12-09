@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
 import com.ust.eventmanagement.Model.EventUser;
 import com.ust.eventmanagement.Service.UserService;
+import com.ust.eventmanagement.dto.AuthResponse;
 import com.ust.eventmanagement.dto.EventUserRequest;
 
 @RestController 
@@ -39,13 +40,20 @@ public class UserController {
     }
 	
 	@PostMapping("/auth/login") 
-	public ResponseEntity<String> login(@RequestBody EventUserRequest authRequest){ 
-		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if (authenticate.isAuthenticated()) {
-            return ResponseEntity.ok(userService.generateToken(authRequest.getUsername()));
-        } else {
-            throw new RuntimeException("invalid access");
-        }
+	public ResponseEntity<AuthResponse> login(@RequestBody EventUserRequest authRequest){ 
+		 Authentication authenticate = authenticationManager.authenticate(
+		            new UsernamePasswordAuthenticationToken(
+		                authRequest.getUsername(), 
+		                authRequest.getPassword()
+		            )
+		        );
+		        
+		        if (authenticate.isAuthenticated()) {
+		            String token = userService.generateToken(authRequest.getUsername());
+		            return ResponseEntity.ok(new AuthResponse(token));
+		        } else {
+		            throw new RuntimeException("invalid access");
+		        }
 	}
 
     @GetMapping("/{id}")
